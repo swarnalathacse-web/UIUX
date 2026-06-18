@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UI/UX Design Tools — II Year B.Tech</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f9f7f4;
+    color: #2c2c2a;
+    min-height: 100vh;
+    padding: 2rem 1rem;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  header {
+    text-align: center;
+    padding: 2.5rem 1rem 2rem;
+    border-bottom: 0.5px solid #d3d1c7;
+    margin-bottom: 2.5rem;
+  }
+
+  .pill {
+    display: inline-block;
+    background: #EEEDFE;
+    color: #3C3489;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 4px 14px;
+    border-radius: 99px;
+    margin-bottom: 1rem;
+    letter-spacing: 0.03em;
+  }
+
+  header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #26215C;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+
+  header p {
+    font-size: 15px;
+    color: #5F5E5A;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888780;
+    margin-bottom: 1rem;
+    padding-left: 2px;
+  }
+
+  .section { margin-bottom: 3rem; }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+  }
+
+  .card {
+    background: #ffffff;
+    border: 0.5px solid #d3d1c7;
+    border-radius: 14px;
+    padding: 1.25rem;
+    transition: box-shadow 0.15s ease;
+  }
+
+  .card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.07); }
+
+  .card-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 0.75rem;
+  }
+
+  .icon-wrap {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #2c2c2a;
+    line-height: 1.2;
+  }
+
+  .card .sub {
+    font-size: 11px;
+    color: #888780;
+    margin-top: 1px;
+  }
+
+  .card p {
+    font-size: 13px;
+    color: #5F5E5A;
+    line-height: 1.6;
+    margin-bottom: 0.75rem;
+  }
+
+  .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 99px;
+  }
+
+  /* Purple */
+  .c-purple .icon-wrap { background: #EEEDFE; color: #534AB7; }
+  .tag.purple { background: #EEEDFE; color: #3C3489; }
+
+  /* Teal */
+  .c-teal .icon-wrap { background: #E1F5EE; color: #0F6E56; }
+  .tag.teal { background: #E1F5EE; color: #085041; }
+
+  /* Coral */
+  .c-coral .icon-wrap { background: #FAECE7; color: #993C1D; }
+  .tag.coral { background: #FAECE7; color: #712B13; }
+
+  /* Blue */
+  .c-blue .icon-wrap { background: #E6F1FB; color: #185FA5; }
+  .tag.blue { background: #E6F1FB; color: #0C447C; }
+
+  /* Amber */
+  .c-amber .icon-wrap { background: #FAEEDA; color: #854F0B; }
+  .tag.amber { background: #FAEEDA; color: #633806; }
+
+  /* Green */
+  .c-green .icon-wrap { background: #EAF3DE; color: #3B6D11; }
+  .tag.green { background: #EAF3DE; color: #27500A; }
+
+  /* Pink */
+  .c-pink .icon-wrap { background: #FBEAF0; color: #993556; }
+  .tag.pink { background: #FBEAF0; color: #72243E; }
+
+  /* Gray */
+  .c-gray .icon-wrap { background: #F1EFE8; color: #5F5E5A; }
+  .tag.gray { background: #F1EFE8; color: #2C2C2A; }
+
+  .phase-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1.25rem;
+  }
+
+  .phase-badge {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    padding: 4px 12px;
+    border-radius: 99px;
+    white-space: nowrap;
+  }
+
+  .phase-line {
+    flex: 1;
+    height: 0.5px;
+    background: #d3d1c7;
+  }
+
+  .tip-box {
+    background: #EEEDFE;
+    border-radius: 12px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 3rem;
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .tip-icon { font-size: 22px; flex-shrink: 0; margin-top: 2px; }
+
+  .tip-box h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: #26215C;
+    margin-bottom: 4px;
+  }
+
+  .tip-box p {
+    font-size: 13px;
+    color: #534AB7;
+    line-height: 1.6;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem 0 1rem;
+    border-top: 0.5px solid #d3d1c7;
+    font-size: 12px;
+    color: #888780;
+    line-height: 1.8;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="pill">II Year B.Tech · Design Elective</div>
+    <h1>UI/UX Design Tools</h1>
+    <p>A quick-reference guide to the tools used in modern product design — from early sketches to handoff.</p>
+  </header>
+
+  <!-- Tip -->
+  <div class="tip-box">
+    <div class="tip-icon">💡</div>
+    <div>
+      <h4>How to read this guide</h4>
+      <p>Tools are grouped by design phase. Each card shows the tool's main purpose, key features, and type. Most tools have a free student plan — start with Figma for prototyping and Miro for collaboration.</p>
+    </div>
+  </div>
+
+  <!-- Phase 1: Research & Planning -->
+  <div class="section">
+    <div class="phase-header">
+      <span class="phase-badge" style="background:#E1F5EE; color:#0F6E56;">Phase 1 — Research &amp; Planning</span>
+      <div class="phase-line"></div>
+    </div>
+    <div class="grid">
+
+      <div class="card c-teal">
+        <div class="card-head">
+          <div class="icon-wrap">🗺️</div>
+          <div>
+            <h3>Miro</h3>
+            <div class="sub">miro.com</div>
+          </div>
+        </div>
+        <p>Infinite online whiteboard for brainstorming, user journey maps, and affinity diagrams. Great for team workshops.</p>
+        <div class="tag-row">
+          <span class="tag teal">Whiteboard</span>
+          <span class="tag teal">Collaboration</span>
+          <span class="tag gray">Free plan</span>
+        </div>
+      </div>
+
+      <div class="card c-blue">
+        <div class="card-head">
+          <div class="icon-wrap">📋</div>
+          <div>
+            <h3>Notion</h3>
+            <div class="sub">notion.so</div>
+          </div>
+        </div>
+        <p>All-in-one workspace for user research notes, personas, and design documentation. Good for team knowledge bases.</p>
+        <div class="tag-row">
+          <span class="tag blue">Documentation</span>
+          <span class="tag blue">Research</span>
+          <span class="tag gray">Free plan</span>
+        </div>
+      </div>
+
+      <div class="card c-amber">
+        <div class="card-head">
+          <div class="icon-wrap">📊</div>
+          <div>
+            <h3>Google Forms</h3>
+            <div class="sub">forms.google.com</div>
+          </div>
+        </div>
+        <p>Simple tool for creating user surveys and collecting quantitative data. Built-in analysis with Google Sheets.</p>
+        <div class="tag-row">
+          <span class="tag amber">Surveys</span>
+          <span class="tag amber">Data</span>
+          <span class="tag gray">Free</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Phase 2: Wireframing -->
+  <div class="section">
+    <div class="phase-header">
+      <span class="phase-badge" style="background:#E6F1FB; color:#185FA5;">Phase 2 — Wireframing</span>
+      <div class="phase-line"></div>
+    </div>
+    <div class="grid">
+
+      <div class="card c-gray">
+        <div class="card-head">
+          <div class="icon-wrap">✏️</div>
+          <div>
+            <h3>Balsamiq</h3>
+            <div class="sub">balsamiq.com</div>
+          </div>
+        </div>
+        <p>Intentionally rough, sketch-style wireframes that keep focus on layout and structure, not aesthetics.</p>
+        <div class="tag-row">
+          <span class="tag gray">Low-fidelity</span>
+          <span class="tag gray">Wireframe</span>
+          <span class="tag coral">Paid</span>
+        </div>
+      </div>
+
+      <div class="card c-purple">
+        <div class="card-head">
+          <div class="icon-wrap">🎨</div>
+          <div>
+            <h3>Figma</h3>
+            <div class="sub">figma.com</div>
+          </div>
+        </div>
+        <p>Industry-standard browser-based design tool. Supports wireframes, high-fidelity mockups, prototypes, and developer handoff — all in one place.</p>
+        <div class="tag-row">
+          <span class="tag purple">Wireframe</span>
+          <span class="tag purple">Prototyping</span>
+          <span class="tag purple">Handoff</span>
+          <span class="tag gray">Free edu plan</span>
+        </div>
+      </div>
+
+      <div class="card c-gray">
+        <div class="card-head">
+          <div class="icon-wrap">📄</div>
+          <div>
+            <h3>Whimsical</h3>
+            <div class="sub">whimsical.com</div>
+          </div>
+        </div>
+        <p>Clean tool for flowcharts, mind maps, and quick wireframes. Very beginner-friendly with a minimal interface.</p>
+        <div class="tag-row">
+          <span class="tag gray">Flowcharts</span>
+          <span class="tag gray">Mind maps</span>
+          <span class="tag teal">Free plan</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Phase 3: Visual Design -->
+  <div class="section">
+    <div class="phase-header">
+      <span class="phase-badge" style="background:#EEEDFE; color:#534AB7;">Phase 3 — Visual Design</span>
+      <div class="phase-line"></div>
+    </div>
+    <div class="grid">
+
+      <div class="card c-purple">
+        <div class="card-head">
+          <div class="icon-wrap">🖌️</div>
+          <div>
+            <h3>Figma</h3>
+            <div class="sub">figma.com</div>
+          </div>
+        </div>
+        <p>Build pixel-perfect UI screens using components, design tokens, auto-layout, and shared styles. The go-to for high-fidelity mockups.</p>
+        <div class="tag-row">
+          <span class="tag purple">Components</span>
+          <span class="tag purple">Auto-layout</span>
+          <span class="tag gray">Free edu plan</span>
+        </div>
+      </div>
+
+      <div class="card c-blue">
+        <div class="card-head">
+          <div class="icon-wrap">🎭</div>
+          <div>
+            <h3>Adobe XD</h3>
+            <div class="sub">adobe.com/xd</div>
+          </div>
+        </div>
+        <p>Adobe's UI/UX tool for designing and prototyping. Integrates well with Photoshop and Illustrator for asset workflows.</p>
+        <div class="tag-row">
+          <span class="tag blue">Hi-fidelity</span>
+          <span class="tag blue">Adobe</span>
+          <span class="tag amber">Paid</span>
+        </div>
+      </div>
+
+      <div class="card c-coral">
+        <div class="card-head">
+          <div class="icon-wrap">🖼️</div>
+          <div>
+            <h3>Canva</h3>
+            <div class="sub">canva.com</div>
+          </div>
+        </div>
+        <p>Drag-and-drop visual design for banners, presentations, and social graphics. Not for app UI, but great for design assets and presentations.</p>
+        <div class="tag-row">
+          <span class="tag coral">Graphics</span>
+          <span class="tag coral">Presentations</span>
+          <span class="tag gray">Free plan</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Phase 4: Prototyping & Testing -->
+  <div class="section">
+    <div class="phase-header">
+      <span class="phase-badge" style="background:#FAECE7; color:#993C1D;">Phase 4 — Prototyping &amp; Testing</span>
+      <div class="phase-line"></div>
+    </div>
+    <div class="grid">
+
+      <div class="card c-purple">
+        <div class="card-head">
+          <div class="icon-wrap">▶️</div>
+          <div>
+            <h3>Figma Prototype</h3>
+            <div class="sub">figma.com</div>
+          </div>
+        </div>
+        <p>Create clickable, shareable prototypes directly from your Figma designs. Supports transitions, overlays, and interactive components.</p>
+        <div class="tag-row">
+          <span class="tag purple">Clickable</span>
+          <span class="tag purple">Shareable</span>
+          <span class="tag gray">Built into Figma</span>
+        </div>
+      </div>
+
+      <div class="card c-green">
+        <div class="card-head">
+          <div class="icon-wrap">🧪</div>
+          <div>
+            <h3>Maze</h3>
+            <div class="sub">maze.co</div>
+          </div>
+        </div>
+        <p>Usability testing platform. Share your Figma prototypes with real users and get heatmaps, click data, and feedback automatically.</p>
+        <div class="tag-row">
+          <span class="tag green">Usability testing</span>
+          <span class="tag green">Analytics</span>
+          <span class="tag gray">Free plan</span>
+        </div>
+      </div>
+
+      <div class="card c-teal">
+        <div class="card-head">
+          <div class="icon-wrap">📱</div>
+          <div>
+            <h3>InVision</h3>
+            <div class="sub">invisionapp.com</div>
+          </div>
+        </div>
+        <p>Prototyping and design feedback tool. Upload screens, link them, and collect comments from stakeholders and users in one place.</p>
+        <div class="tag-row">
+          <span class="tag teal">Prototyping</span>
+          <span class="tag teal">Feedback</span>
+          <span class="tag amber">Freemium</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Phase 5: Handoff -->
+  <div class="section">
+    <div class="phase-header">
+      <span class="phase-badge" style="background:#EAF3DE; color:#3B6D11;">Phase 5 — Developer Handoff</span>
+      <div class="phase-line"></div>
+    </div>
+    <div class="grid">
+
+      <div class="card c-purple">
+        <div class="card-head">
+          <div class="icon-wrap">📐</div>
+          <div>
+            <h3>Figma Dev Mode</h3>
+            <div class="sub">figma.com</div>
+          </div>
+        </div>
+        <p>Inspect designs for exact spacing, font sizes, colors, and export assets. Generates code snippets for CSS, iOS, and Android automatically.</p>
+        <div class="tag-row">
+          <span class="tag purple">Inspect</span>
+          <span class="tag purple">CSS export</span>
+          <span class="tag gray">Built into Figma</span>
+        </div>
+      </div>
+
+      <div class="card c-pink">
+        <div class="card-head">
+          <div class="icon-wrap">🔗</div>
+          <div>
+            <h3>Zeplin</h3>
+            <div class="sub">zeplin.io</div>
+          </div>
+        </div>
+        <p>Dedicated handoff tool. Connects with Figma/Sketch and presents design specs, assets, and styleguides clearly to developers.</p>
+        <div class="tag-row">
+          <span class="tag pink">Specs</span>
+          <span class="tag pink">Assets</span>
+          <span class="tag gray">Free plan</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Summary table concept -->
+  <div class="section">
+    <div class="section-label">Quick reference</div>
+    <div style="background:#ffffff; border:0.5px solid #d3d1c7; border-radius:14px; overflow:hidden;">
+      <table style="width:100%; border-collapse:collapse; font-size:13px;">
+        <thead>
+          <tr style="background:#f9f7f4;">
+            <th style="text-align:left; padding:12px 16px; font-weight:600; color:#2c2c2a; border-bottom:0.5px solid #d3d1c7;">Tool</th>
+            <th style="text-align:left; padding:12px 16px; font-weight:600; color:#2c2c2a; border-bottom:0.5px solid #d3d1c7;">Best for</th>
+            <th style="text-align:left; padding:12px 16px; font-weight:600; color:#2c2c2a; border-bottom:0.5px solid #d3d1c7;">Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:0.5px solid #f1efe8;">
+            <td style="padding:11px 16px; font-weight:500;">Figma</td>
+            <td style="padding:11px 16px; color:#5F5E5A;">Wireframes, UI design, prototyping, handoff</td>
+            <td style="padding:11px 16px;"><span class="tag teal">Free edu</span></td>
+          </tr>
+          <tr style="border-bottom:0.5px solid #f1efe8;">
+            <td style="padding:11px 16px; font-weight:500;">Miro</td>
+            <td style="padding:11px 16px; color:#5F5E5A;">Brainstorming, user journey maps</td>
+            <td style="padding:11px 16px;"><span class="tag teal">Free plan</span></td>
+          </tr>
+          <tr style="border-bottom:0.5px solid #f1efe8;">
+            <td style="padding:11px 16px; font-weight:500;">Maze</td>
+            <td style="padding:11px 16px; color:#5F5E5A;">Usability testing with real users</td>
+            <td style="padding:11px 16px;"><span class="tag teal">Free plan</span></td>
+          </tr>
+          <tr style="border-bottom:0.5px solid #f1efe8;">
+            <td style="padding:11px 16px; font-weight:500;">Balsamiq</td>
+            <td style="padding:11px 16px; color:#5F5E5A;">Low-fidelity sketch wireframes</td>
+            <td style="padding:11px 16px;"><span class="tag amber">Paid</span></td>
+          </tr>
+          <tr style="border-bottom:0.5px solid #f1efe8;">
+            <td style="padding:11px 16px; font-weight:500;">Notion</td>
+            <td style="padding:11px 16px; color:#5F5E5A;">Research docs, personas, design specs</td>
+            <td style="padding:11px 16px;"><span class="tag teal">Free plan</span></td>
+          </tr>
+          <tr>
+            <td style="padding:11px 16px; font-weight:500;">Zeplin</td>
+            <td style="padding:11px 16px; color:#5F5E5A;">Developer handoff, design specs</td>
+            <td style="padding:11px 16px;"><span class="tag teal">Free plan</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <footer>
+    <div style="margin-bottom:6px;">UI/UX Design Tools Reference · II Year B.Tech</div>
+    <div>Compiled for academic use · All tools have free or student plans</div>
+  </footer>
+
+</div>
+</body>
+</html>

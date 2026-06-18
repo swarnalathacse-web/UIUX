@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Course Page</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    min-height: 100vh;
+    padding: 3rem 2rem;
+  }
+
+  .page { max-width: 900px; margin: 0 auto; }
+
+  h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #111;
+    margin-bottom: 0.4rem;
+  }
+
+  .faculty {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2.5rem;
+  }
+
+  /* ── Course Table ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1.5px solid #111;
+    margin-bottom: 3rem;
+  }
+
+  th {
+    font-size: 1.1rem;
+    font-weight: 700;
+    padding: 1rem 1.5rem;
+    border: 1px solid #111;
+    text-align: center;
+    background: #fff;
+  }
+
+  td {
+    border: 1px solid #111;
+    padding: 1.2rem 1.5rem;
+    text-align: center;
+  }
+
+  td a {
+    color: #1a55cc;
+    text-decoration: underline;
+    font-size: 1.05rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  td a:hover { color: #0d3a9e; }
+
+  /* ── Content Sections ── */
+  .content-section {
+    display: none;
+    background: #f9f7f4;
+    border: 0.5px solid #d3d1c7;
+    border-radius: 14px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.25s ease;
+  }
+
+  .content-section.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .content-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #26215C;
+    margin-bottom: 0.4rem;
+  }
+
+  .content-section .tagline {
+    font-size: 0.9rem;
+    color: #888780;
+    margin-bottom: 1.5rem;
+  }
+
+  .content-section p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: #444;
+    margin-bottom: 1.2rem;
+  }
+
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+  .topic-card {
+    background: #fff;
+    border: 0.5px solid #d3d1c7;
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+  }
+
+  .topic-card h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #2c2c2a;
+    margin-bottom: 4px;
+  }
+
+  .topic-card p {
+    font-size: 0.8rem;
+    color: #888780;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .pill {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 99px;
+    margin-right: 6px;
+    margin-bottom: 4px;
+  }
+
+  .purple { background: #EEEDFE; color: #3C3489; }
+  .teal   { background: #E1F5EE; color: #085041; }
+  .blue   { background: #E6F1FB; color: #0C447C; }
+  .amber  { background: #FAEEDA; color: #633806; }
+  .coral  { background: #FAECE7; color: #712B13; }
+  .green  { background: #EAF3DE; color: #27500A; }
+
+  .close-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    font-size: 13px;
+    color: #888;
+    cursor: pointer;
+    border: 0.5px solid #d3d1c7;
+    border-radius: 99px;
+    padding: 4px 14px;
+    background: #fff;
+  }
+
+  .close-btn:hover { background: #f1efe8; }
+
+  /* ── Quiz Sections ── */
+  .quiz-section {
+    display: none;
+    background: #f9f7f4;
+    border: 0.5px solid #d3d1c7;
+    border-radius: 14px;
+    padding: 2rem 2.5rem;
+    margin-bottom: 2rem;
+    animation: fadeIn 0.25s ease;
+  }
+
+  .quiz-section.active { display: block; }
+
+  .quiz-section h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #26215C;
+    margin-bottom: 1.5rem;
+  }
+
+  .question { margin-bottom: 1.5rem; }
+
+  .question p {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2c2c2a;
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+  }
+
+  .options label {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: #444;
+    margin-bottom: 6px;
+    cursor: pointer;
+    line-height: 1.5;
+  }
+
+  .options input[type="radio"] { margin-top: 3px; flex-shrink: 0; }
+
+  .submit-btn {
+    background: #534AB7;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 0.5rem;
+    margin-right: 10px;
+  }
+
+  .submit-btn:hover { background: #3C3489; }
+
+  .result-box {
+    display: none;
+    background: #EEEDFE;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin-top: 1rem;
+    font-size: 14px;
+    color: #3C3489;
+    font-weight: 500;
+  }
+
+  .result-box.show { display: block; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <h1>Course Page</h1>
+  <div class="faculty">Faculty: A. Swarna Latha</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Topic</th>
+        <th>Quiz</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a onclick="toggleContent('uiux-content', 'uiux-quiz')">Introduction to UI/UX</a></td>
+        <td><a onclick="toggleQuiz('uiux-quiz', 'uiux-content')">Quiz</a></td>
+      </tr>
+      <tr>
+        <td><a onclick="toggleContent('figma-content', 'figma-quiz')">Introduction to Figma Tool</a></td>
+        <td><a onclick="toggleQuiz('figma-quiz', 'figma-content')">Quiz</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ── Introduction to UI/UX ── -->
+  <div id="uiux-content" class="content-section">
+    <h2>Introduction to UI/UX</h2>
+    <div class="tagline">Understanding the difference between User Interface and User Experience design</div>
+
+    <p><strong>User Interface (UI)</strong> is what users see and interact with — buttons, icons, colors, typography, and layout. <strong>User Experience (UX)</strong> is how users feel when using a product — ease of use, satisfaction, and overall flow. Good design needs both.</p>
+
+    <div class="topic-grid">
+      <div class="topic-card">
+        <h4>What is UI?</h4>
+        <p>Visual elements: colors, fonts, buttons, icons, spacing, and layout of each screen.</p>
+      </div>
+      <div class="topic-card">
+        <h4>What is UX?</h4>
+        <p>The overall journey — how easy, efficient, and enjoyable a product is to use.</p>
+      </div>
+      <div class="topic-card">
+        <h4>User Research</h4>
+        <p>Interviews, surveys, and observations to understand who the user is and what they need.</p>
+      </div>
+      <div class="topic-card">
+        <h4>Wireframing</h4>
+        <p>Simple sketches or digital layouts showing structure before adding visual design.</p>
+      </div>
+      <div class="topic-card">
+        <h4>Prototyping</h4>
+        <p>Clickable models of the design used to test ideas before coding begins.</p>
+      </div>
+      <div class="topic-card">
+        <h4>Usability Testing</h4>
+        <p>Watching real users interact with a prototype to find problems and improve flow.</p>
+      </div>
+    </div>
+
+    <p><strong>Key UX Principles:</strong> Consistency, feedback, simplicity, accessibility, and error prevention.</p>
+
+    <div>
+      <span class="pill purple">UI Design</span>
+      <span class="pill teal">UX Research</span>
+      <span class="pill blue">Wireframing</span>
+      <span class="pill amber">Prototyping</span>
+      <span class="pill coral">Usability Testing</span>
+      <span class="pill green">Accessibility</span>
+    </div>
+
+    <br>
+    <span class="close-btn" onclick="closeSection('uiux-content')">✕ Close</span>
+  </div>
+
+  <!-- ── Introduction to UI/UX Quiz ── -->
+  <div id="uiux-quiz" class="quiz-section">
+    <h2>Quiz — Introduction to UI/UX</h2>
+
+    <div class="question">
+      <p>1. What does UI stand for?</p>
+      <div class="options">
+        <label><input type="radio" name="q1" value="a"> User Interaction</label>
+        <label><input type="radio" name="q1" value="b"> User Interface</label>
+        <label><input type="radio" name="q1" value="c"> Universal Integration</label>
+        <label><input type="radio" name="q1" value="d"> Unified Input</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>2. Which of the following is a UX activity?</p>
+      <div class="options">
+        <label><input type="radio" name="q2" value="a"> Choosing button colors</label>
+        <label><input type="radio" name="q2" value="b"> Selecting fonts</label>
+        <label><input type="radio" name="q2" value="c"> Conducting user interviews</label>
+        <label><input type="radio" name="q2" value="d"> Picking icon shapes</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>3. What is a wireframe?</p>
+      <div class="options">
+        <label><input type="radio" name="q3" value="a"> A fully designed screen with colors and images</label>
+        <label><input type="radio" name="q3" value="b"> A low-fidelity layout showing structure and placement</label>
+        <label><input type="radio" name="q3" value="c"> A live website</label>
+        <label><input type="radio" name="q3" value="d"> A programming framework</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>4. Which principle means users can recover easily from mistakes?</p>
+      <div class="options">
+        <label><input type="radio" name="q4" value="a"> Consistency</label>
+        <label><input type="radio" name="q4" value="b"> Accessibility</label>
+        <label><input type="radio" name="q4" value="c"> Error Prevention &amp; Recovery</label>
+        <label><input type="radio" name="q4" value="d"> Visual Hierarchy</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>5. Usability testing is done to:</p>
+      <div class="options">
+        <label><input type="radio" name="q5" value="a"> Write code faster</label>
+        <label><input type="radio" name="q5" value="b"> Identify design problems by observing real users</label>
+        <label><input type="radio" name="q5" value="c"> Create color palettes</label>
+        <label><input type="radio" name="q5" value="d"> Build the final product</label>
+      </div>
+    </div>
+
+    <button class="submit-btn" onclick="submitQuiz('uiux-quiz-result', ['b','c','b','c','b'])">Submit Quiz</button>
+    <span class="close-btn" onclick="closeSection('uiux-quiz')">✕ Close</span>
+
+    <div id="uiux-quiz-result" class="result-box"></div>
+  </div>
+
+  <!-- ── Introduction to Figma ── -->
+  <div id="figma-content" class="content-section">
+    <h2>Introduction to Figma Tool</h2>
+    <div class="tagline">The industry-standard browser-based design tool for UI/UX professionals</div>
+
+    <p><strong>Figma</strong> is a free, browser-based design tool used by product designers, UI/UX teams, and developers worldwide. It combines wireframing, visual design, prototyping, and developer handoff into one platform — with real-time collaboration built in.</p>
+
+    <div class="topic-grid">
+      <div class="topic-card">
+        <h4>Frames &amp; Layers</h4>
+        <p>Frames act as artboards. Layers panel organizes all elements in a hierarchy.</p>
+      </div>
+      <div class="topic-card">
+        <h4>Components</h4>
+        <p>Reusable UI elements (buttons, cards). Edit the master and all instances update.</p>
+      </div>
+      <div class="topic-card">
+        <h4>Auto Layout</h4>
+        <p>Frames that resize automatically when content changes — like CSS flexbox.</p>
+      </div>
+      <div class="topic-card">
+        <h4>Prototyping</h4>
+        <p>Connect frames with interactions to create clickable, shareable prototypes.</p>
+      </div>
+      <div class="topic-card">
+        <h4>Styles &amp; Tokens</h4>
+        <p>Save colors, fonts, and effects as reusable styles for design consistency.</p>
+      </div>
+      <div class="topic-card">
+        <h4>Dev Mode</h4>
+        <p>Lets developers inspect spacing, colors, and export CSS — no guessing needed.</p>
+      </div>
+    </div>
+
+    <p><strong>Getting started:</strong> Sign up at figma.com → Create a new file → Add a Frame (F key) → Draw shapes, add text → Connect screens for a prototype.</p>
+
+    <div>
+      <span class="pill purple">Browser-based</span>
+      <span class="pill teal">Real-time Collab</span>
+      <span class="pill blue">Components</span>
+      <span class="pill amber">Auto Layout</span>
+      <span class="pill coral">Prototyping</span>
+      <span class="pill green">Dev Handoff</span>
+    </div>
+
+    <br>
+    <span class="close-btn" onclick="closeSection('figma-content')">✕ Close</span>
+  </div>
+
+  <!-- ── Figma Quiz ── -->
+  <div id="figma-quiz" class="quiz-section">
+    <h2>Quiz — Introduction to Figma</h2>
+
+    <div class="question">
+      <p>1. Figma is primarily a:</p>
+      <div class="options">
+        <label><input type="radio" name="fq1" value="a"> Mobile app only</label>
+        <label><input type="radio" name="fq1" value="b"> Browser-based design and prototyping tool</label>
+        <label><input type="radio" name="fq1" value="c"> Code editor</label>
+        <label><input type="radio" name="fq1" value="d"> Video editing software</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>2. In Figma, a "Component" is:</p>
+      <div class="options">
+        <label><input type="radio" name="fq2" value="a"> A color style</label>
+        <label><input type="radio" name="fq2" value="b"> A reusable UI element with linked instances</label>
+        <label><input type="radio" name="fq2" value="c"> A page in the file</label>
+        <label><input type="radio" name="fq2" value="d"> A plugin</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>3. Auto Layout in Figma is similar to which CSS concept?</p>
+      <div class="options">
+        <label><input type="radio" name="fq3" value="a"> Grid layout</label>
+        <label><input type="radio" name="fq3" value="b"> Absolute positioning</label>
+        <label><input type="radio" name="fq3" value="c"> Flexbox</label>
+        <label><input type="radio" name="fq3" value="d"> Float</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>4. What is "Dev Mode" in Figma used for?</p>
+      <div class="options">
+        <label><input type="radio" name="fq4" value="a"> Writing JavaScript code</label>
+        <label><input type="radio" name="fq4" value="b"> Letting developers inspect designs and export CSS values</label>
+        <label><input type="radio" name="fq4" value="c"> Animating elements</label>
+        <label><input type="radio" name="fq4" value="d"> Creating icons</label>
+      </div>
+    </div>
+
+    <div class="question">
+      <p>5. To start a prototype in Figma, you need to:</p>
+      <div class="options">
+        <label><input type="radio" name="fq5" value="a"> Write HTML code</label>
+        <label><input type="radio" name="fq5" value="b"> Export to PDF first</label>
+        <label><input type="radio" name="fq5" value="c"> Connect frames using the Prototype panel with interactions</label>
+        <label><input type="radio" name="fq5" value="d"> Use a separate app</label>
+      </div>
+    </div>
+
+    <button class="submit-btn" onclick="submitQuiz('figma-quiz-result', ['b','b','c','b','c'])">Submit Quiz</button>
+    <span class="close-btn" onclick="closeSection('figma-quiz')">✕ Close</span>
+
+    <div id="figma-quiz-result" class="result-box"></div>
+  </div>
+
+</div>
+
+<script>
+  function toggleContent(contentId, quizId) {
+    closeSection(quizId);
+    const el = document.getElementById(contentId);
+    const isActive = el.classList.contains('active');
+    document.querySelectorAll('.content-section, .quiz-section').forEach(s => s.classList.remove('active'));
+    if (!isActive) el.classList.add('active');
+    if (!isActive) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function toggleQuiz(quizId, contentId) {
+    closeSection(contentId);
+    const el = document.getElementById(quizId);
+    const isActive = el.classList.contains('active');
+    document.querySelectorAll('.content-section, .quiz-section').forEach(s => s.classList.remove('active'));
+    if (!isActive) el.classList.add('active');
+    if (!isActive) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
+  function closeSection(id) {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('active');
+  }
+
+  function submitQuiz(resultId, answers) {
+    const quizEl = document.getElementById(resultId).closest('.quiz-section');
+    const radios = ['1','2','3','4','5'];
+    let score = 0;
+    let prefix = resultId === 'uiux-quiz-result' ? 'q' : 'fq';
+
+    radios.forEach((n, i) => {
+      const selected = quizEl.querySelector(`input[name="${prefix}${n}"]:checked`);
+      if (selected && selected.value === answers[i]) score++;
+    });
+
+    const resultEl = document.getElementById(resultId);
+    resultEl.classList.add('show');
+    if (score === 5) {
+      resultEl.style.background = '#EAF3DE';
+      resultEl.style.color = '#27500A';
+      resultEl.innerHTML = `🎉 Excellent! You scored <strong>${score}/5</strong>. Perfect score!`;
+    } else if (score >= 3) {
+      resultEl.style.background = '#EEEDFE';
+      resultEl.style.color = '#3C3489';
+      resultEl.innerHTML = `👍 Good job! You scored <strong>${score}/5</strong>. Review the topics you missed.`;
+    } else {
+      resultEl.style.background = '#FAECE7';
+      resultEl.style.color = '#712B13';
+      resultEl.innerHTML = `📖 You scored <strong>${score}/5</strong>. Please revisit the topic and try again.`;
+    }
+  }
+</script>
+</body>
+</html>

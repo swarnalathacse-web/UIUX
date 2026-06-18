@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UI/UX Design Tools</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f9f7f4;
+      color: #2d2d2d;
+      line-height: 1.6;
+    }
+
+    /* NAV */
+    nav {
+      background: #fff;
+      border-bottom: 1px solid #e8e3dc;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 58px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .nav-brand {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #d97757;
+      letter-spacing: -0.3px;
+    }
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.85rem;
+      color: #666;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #d97757; }
+
+    /* HERO */
+    .hero {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 5rem 2rem 3rem;
+      text-align: center;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: #fdf0ea;
+      color: #d97757;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 700;
+      color: #1a1a1a;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .hero h1 span { color: #d97757; }
+    .hero p {
+      font-size: 1.05rem;
+      color: #666;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* GRID */
+    .tools-section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2rem 2rem 5rem;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #aaa;
+      margin-bottom: 1.5rem;
+    }
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1rem;
+    }
+
+    /* CARD */
+    .card {
+      background: #fff;
+      border: 1px solid #e8e3dc;
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: box-shadow 0.2s, transform 0.2s;
+      cursor: default;
+    }
+    .card:hover {
+      box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+      transform: translateY(-2px);
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.9rem;
+    }
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .card-name {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #1a1a1a;
+    }
+    .card-category {
+      font-size: 0.72rem;
+      color: #aaa;
+      font-weight: 500;
+      margin-top: 1px;
+    }
+    .card-desc {
+      font-size: 0.875rem;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    .card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 9px;
+      border-radius: 20px;
+      background: #f3f0ec;
+      color: #888;
+    }
+
+    /* COLOR SCHEMES per card */
+    .c1 { background: #fdf0ea; }
+    .c2 { background: #eaf3fd; }
+    .c3 { background: #eafdf0; }
+    .c4 { background: #fdf5ea; }
+    .c5 { background: #f0eafd; }
+    .c6 { background: #fdeaea; }
+
+    /* BOTTOM STRIP */
+    .tip-bar {
+      background: #fff8f5;
+      border-top: 1px solid #e8e3dc;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #888;
+    }
+    .tip-bar strong { color: #d97757; }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-brand">✦ DesignToolkit</div>
+    <div class="nav-links">
+      <a href="#tools">Tools</a>
+      <a href="#tips">Tips</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-tag">UI/UX Reference</div>
+    <h1>Design tools that <span>move fast</span></h1>
+    <p>A quick guide to the most-used tools in modern UI/UX workflows — from wireframing to handoff.</p>
+  </section>
+
+  <section class="tools-section" id="tools">
+    <div class="section-label">Popular Tools</div>
+    <div class="tools-grid">
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon c1">🎨</div>
+          <div>
+            <div class="card-name">Figma</div>
+            <div class="card-category">Design & Prototyping</div>
+          </div>
+        </div>
+        <p class="card-desc">Browser-based, real-time collaborative design tool. Industry standard for UI design, components, and dev handoff.</p>
+        <div class="card-tags">
+          <span class="tag">Collaboration</span>
+          <span class="tag">Prototyping</span>
+          <span class="tag">Free tier</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon c2">🖊️</div>
+          <div>
+            <div class="card-name">Adobe XD</div>
+            <div class="card-category">Design & Prototype</div>
+          </div>
+        </div>
+        <p class="card-desc">Adobe's vector-based UX tool for designing and prototyping apps and websites with voice prototyping support.</p>
+        <div class="card-tags">
+          <span class="tag">Adobe Suite</span>
+          <span class="tag">Voice UI</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon c3">📐</div>
+          <div>
+            <div class="card-name">Sketch</div>
+            <div class="card-category">UI Design</div>
+          </div>
+        </div>
+        <p class="card-desc">Mac-native design tool known for its symbol system and plugin ecosystem. Popular in product and app design teams.</p>
+        <div class="card-tags">
+          <span class="tag">Mac only</span>
+          <span class="tag">Plugins</span>
+          <span class="tag">Symbols</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon c4">🗂️</div>
+          <div>
+            <div class="card-name">Notion / FigJam</div>
+            <div class="card-category">Ideation & Whiteboard</div>
+          </div>
+        </div>
+        <p class="card-desc">FigJam for collaborative whiteboarding and sticky notes; Notion for organizing research, user journeys, and documentation.</p>
+        <div class="card-tags">
+          <span class="tag">Whiteboard</span>
+          <span class="tag">Research</span>
+          <span class="tag">Docs</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon c5">🔬</div>
+          <div>
+            <div class="card-name">Maze / Useberry</div>
+            <div class="card-category">User Testing</div>
+          </div>
+        </div>
+        <p class="card-desc">Run unmoderated usability tests on prototypes. Gather click maps, heatmaps, and task completion rates from real users.</p>
+        <div class="card-tags">
+          <span class="tag">Usability</span>
+          <span class="tag">Heatmaps</span>
+          <span class="tag">Analytics</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon c6">🚀</div>
+          <div>
+            <div class="card-name">Zeplin / Storybook</div>
+            <div class="card-category">Dev Handoff</div>
+          </div>
+        </div>
+        <p class="card-desc">Bridge design and development. Zeplin exports specs, assets, and styles; Storybook documents live UI components.</p>
+        <div class="card-tags">
+          <span class="tag">Handoff</span>
+          <span class="tag">Dev-ready</span>
+          <span class="tag">Components</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="tip-bar" id="tips">
+    💡 <strong>Pro tip:</strong> Start with wireframes in FigJam → refine in Figma → test with Maze → hand off via Zeplin. That's a full UX cycle.
+  </div>
+
+</body>
+</html>
